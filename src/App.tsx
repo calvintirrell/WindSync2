@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { VIEWS, type ViewId } from './views'
+import { ensureSeeded } from './db/seed'
 import PlanOfDay from './views/PlanOfDay'
 import WorkOrderDetails from './views/WorkOrderDetails'
 import TechnicianDashboard from './views/TechnicianDashboard'
@@ -16,7 +17,12 @@ const VIEW_COMPONENTS: Record<ViewId, () => React.JSX.Element> = {
 
 export default function App() {
   const [view, setView] = useState<ViewId>('plan-of-day')
+  const [ready, setReady] = useState(false)
   const ActiveView = VIEW_COMPONENTS[view]
+
+  useEffect(() => {
+    ensureSeeded().then(() => setReady(true))
+  }, [])
 
   return (
     <div className="flex min-h-screen bg-slate-50 text-slate-900">
@@ -43,7 +49,7 @@ export default function App() {
         </nav>
       </aside>
       <main className="flex-1 p-6">
-        <ActiveView />
+        {ready ? <ActiveView /> : <p className="text-slate-400">Loading…</p>}
       </main>
     </div>
   )

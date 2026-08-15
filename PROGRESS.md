@@ -6,7 +6,7 @@ Local-only until the GitHub repo is created (planned URL: calvintirrell.github.i
 ## Phase plan
 
 - [x] **P0 — Scaffold**: Vite + React 19 + TS + Tailwind 4, sidebar shell with 5 views, Vitest, Pages deploy workflow (inert until repo exists). 3 tests.
-- [ ] **P1 — Data layer**: IndexedDB (Dexie) schema, seed data ported from `database_setup.py`, reset-to-seed.
+- [x] **P1 — Data layer**: Dexie schema (technicians/assets/workOrders/logs/notifications), seed ported verbatim from `database_setup.py` (Alex Ray, 3 turbines, 4 work orders), `ensureSeeded` on app start + `resetToSeed`. 6 tests total.
 - [ ] **P2 — Plan of Day**: work order list w/ priority sort+filter, proximity grouping (haversine), Leaflet/OpenStreetMap map.
 - [ ] **P3 — Work Order Details**: checklist tap-to-log, AI diagnostic banner, tribal knowledge, photo/note logging (IndexedDB blobs).
 - [ ] **P4 — Notifications**: store, priority queue, sidebar badge, notification center, toasts, demo simulate buttons, clear/reset.
