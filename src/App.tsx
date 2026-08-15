@@ -1,17 +1,19 @@
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { VIEWS, type ViewId } from './views'
 import { db } from './db/db'
 import { ensureSeeded, resetToSeed } from './db/seed'
 import { showToast } from './components/Toaster'
-import PlanOfDay from './views/PlanOfDay'
-import WorkOrderDetails from './views/WorkOrderDetails'
-import TechnicianDashboard from './views/TechnicianDashboard'
-import Notifications from './views/Notifications'
-import ManagerDashboard from './views/ManagerDashboard'
 import Toaster from './components/Toaster'
 
-const VIEW_COMPONENTS: Record<ViewId, () => React.JSX.Element> = {
+// Lazy views keep Leaflet (Plan of Day) and Recharts (dashboards) out of the first paint
+const PlanOfDay = lazy(() => import('./views/PlanOfDay'))
+const WorkOrderDetails = lazy(() => import('./views/WorkOrderDetails'))
+const TechnicianDashboard = lazy(() => import('./views/TechnicianDashboard'))
+const Notifications = lazy(() => import('./views/Notifications'))
+const ManagerDashboard = lazy(() => import('./views/ManagerDashboard'))
+
+const VIEW_COMPONENTS: Record<ViewId, React.ComponentType> = {
   'plan-of-day': PlanOfDay,
   'work-order-details': WorkOrderDetails,
   'my-dashboard': TechnicianDashboard,
@@ -93,7 +95,13 @@ export default function App() {
         </div>
       </aside>
       <main className="flex-1 p-6">
-        {ready ? <ActiveView /> : <p className="text-slate-400">Loading…</p>}
+        {ready ? (
+          <Suspense fallback={<p className="text-slate-400">Loading…</p>}>
+            <ActiveView />
+          </Suspense>
+        ) : (
+          <p className="text-slate-400">Loading…</p>
+        )}
       </main>
       <Toaster />
     </div>

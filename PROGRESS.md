@@ -12,6 +12,8 @@ Local-only until the GitHub repo is created (planned URL: calvintirrell.github.i
 - [x] **P4 — Notifications**: center view (metrics, quick actions, priority/read filters, accent-colored cards, mark-read/acknowledge), sidebar unread badge + critical alert list + "Clear Logs & Notifications" reset, simulate buttons on Plan of Day. 39 tests total.
 - [x] **P5 — Dashboards**: technician metrics + priority bar chart (single hue, live-updating), manager cost-savings grouped bar chart (validated CVD-safe pair `#c2410c`/`#0284c7`, legend + tooltips + table fallback), emergency broadcast + shift update controls. Shared Metric component. 45 tests total.
   - P6 note: bundle is 251 kB gzip in one chunk — consider React.lazy for recharts/leaflet views.
-- [ ] **P6 — Offline/PWA + polish**: service worker, installable, final pass.
+- [x] **P6 — Offline/PWA + polish**: vite-plugin-pwa (autoUpdate SW, 23 precached entries, OSM tile runtime cache), manifest + generated icon set (192/512/maskable/apple-touch/favicon), lazy-loaded views (first paint 95 kB gzip, was 251), real README, meta/theme-color. Verified serving at /windsync2/ subpath via `vite preview`. 45 tests.
+
+All build phases complete. Remaining: create GitHub repo `windsync2`, push, enable Pages (Actions source) → live at calvintirrell.github.io/windsync2.
 
 Gate: tests green → update this file → commit → wait for approval before next phase.
