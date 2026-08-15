@@ -26,3 +26,42 @@ export async function createNotification(input: CreateNotificationInput): Promis
   }
   return (await db.notifications.add(notification)) as number
 }
+
+export async function markAsRead(id: number): Promise<void> {
+  const n = await db.notifications.get(id)
+  if (n && !n.readAt) await db.notifications.update(id, { readAt: new Date().toISOString() })
+}
+
+export async function acknowledge(id: number): Promise<void> {
+  const n = await db.notifications.get(id)
+  if (!n || n.acknowledgedAt) return
+  // Acknowledging implies having read it
+  await db.notifications.update(id, {
+    acknowledgedAt: new Date().toISOString(),
+    readAt: n.readAt ?? new Date().toISOString(),
+  })
+}
+
+export async function markAllRead(): Promise<void> {
+  const now = new Date().toISOString()
+  await db.notifications.toCollection().modify((n) => {
+    if (!n.readAt) n.readAt = now
+  })
+}
+
+export async function acknowledgeAllCritical(): Promise<void> {
+  const now = new Date().toISOString()
+  await db.notifications.toCollection().modify((n) => {
+    if (n.priority === 'critical' && n.requiresAcknowledgment && !n.acknowledgedAt) {
+      n.acknowledgedAt = now
+      if (!n.readAt) n.readAt = now
+    }
+  })
+}
+
+export const PRIORITY_EMOJIS: Record<string, string> = {
+  critical: '🚨',
+  high: '⚠️',
+  medium: '📋',
+  low: '💡',
+}

@@ -11,6 +11,8 @@ import {
   type SortMode,
 } from '../lib/planOfDay'
 import JobSiteMap from './JobSiteMap'
+import { createNotification } from '../lib/notifications'
+import { showToast } from '../components/Toaster'
 
 const PRIORITY_BADGE: Record<Priority, string> = {
   High: 'bg-red-100 text-red-800',
@@ -94,6 +96,50 @@ export default function PlanOfDay() {
       <p className="rounded-lg bg-sky-50 px-4 py-3 text-sm text-sky-900">
         💡 <strong>Optimization Simulation</strong>: Tasks are clustered by location.
       </p>
+
+      <div>
+        <h3 className="mb-2 text-lg font-semibold">🔔 Notification Testing</h3>
+        <div className="flex flex-wrap gap-3">
+          <button
+            onClick={async () => {
+              await createNotification({
+                title: '🌪️ High Wind Warning',
+                message: 'Wind speeds exceeding 25 mph detected. Suspend all tower work immediately.',
+                priority: 'critical',
+                category: 'safety',
+                metadata: { windSpeed: 28, location: 'North Ridge' },
+              })
+              showToast('🚨 Safety alert created — see the 🔔 Notifications view')
+            }}
+            className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium hover:bg-slate-50"
+          >
+            🚨 Simulate High Wind Alert
+          </button>
+          <button
+            onClick={async () => {
+              const first = filtered[0]
+              if (!first) return
+              await createNotification({
+                title: '📋 Work Order Update',
+                message: `Work order #${first.id} priority changed to High`,
+                priority: 'high',
+                category: 'task',
+                metadata: {
+                  workOrderId: first.id,
+                  title: first.title,
+                  updateTime: new Date().toISOString(),
+                },
+              })
+              showToast(
+                `📋 Priority-change notification created for work order #${first.id} — see the 🔔 Notifications view`,
+              )
+            }}
+            className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium hover:bg-slate-50"
+          >
+            📋 Simulate Priority Change
+          </button>
+        </div>
+      </div>
 
       {filtered.length === 0 ? (
         <p className="rounded-lg bg-amber-50 p-4 text-amber-800">

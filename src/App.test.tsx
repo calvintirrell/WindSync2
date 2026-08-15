@@ -1,7 +1,11 @@
 import { fireEvent, render, screen } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import App from './App'
 import { VIEWS } from './views'
+
+vi.mock('./views/JobSiteMap', () => ({
+  default: () => <div data-testid="job-site-map" />,
+}))
 
 describe('App shell', () => {
   it('renders the sidebar with all five views', () => {
@@ -21,7 +25,7 @@ describe('App shell', () => {
     render(<App />)
     await screen.findByRole('heading', { level: 2, name: 'Plan of Day (POD)' })
     fireEvent.click(screen.getByRole('button', { name: '🔔 Notifications' }))
-    expect(await screen.findByRole('heading', { level: 2, name: 'Notification Center' })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { level: 2, name: '🔔 Notifications Center' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: '🔔 Notifications' })).toHaveAttribute('aria-current', 'page')
   })
 })
