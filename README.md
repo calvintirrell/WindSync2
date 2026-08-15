@@ -6,6 +6,8 @@ A field maintenance management web app for wind farm technicians — view work o
 
 This is a static rebuild of [windsync](https://github.com/calvintirrell/windsync) (Python/Streamlit). All data lives in the browser via IndexedDB — every visitor gets their own isolated demo data, seeded on first visit.
 
+There's also a **native iOS version**: [WindSync2_iOS](https://github.com/calvintirrell/WindSync2_iOS) — SwiftUI + SwiftData with MapKit, Swift Charts, and real lock-screen notifications.
+
 ## Features
 
 - **Plan of Day** — assigned work orders with priority sort/filter, suggested secondary tasks (nearby lower-priority jobs within 10 miles), and a Leaflet/OpenStreetMap site map
