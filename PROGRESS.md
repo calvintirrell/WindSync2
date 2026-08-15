@@ -1,7 +1,7 @@
 # WindSync2 — Progress
 
 React/Vite/TypeScript rebuild of WindSync for native GitHub Pages hosting.
-Local-only until the GitHub repo is created (planned URL: calvintirrell.github.io/windsync2).
+Local-only until the GitHub repo is created (planned URL: calvintirrell.github.io/WindSync2).
 
 ## Phase plan
 
@@ -14,6 +14,6 @@ Local-only until the GitHub repo is created (planned URL: calvintirrell.github.i
   - P6 note: bundle is 251 kB gzip in one chunk — consider React.lazy for recharts/leaflet views.
 - [x] **P6 — Offline/PWA + polish**: vite-plugin-pwa (autoUpdate SW, 23 precached entries, OSM tile runtime cache), manifest + generated icon set (192/512/maskable/apple-touch/favicon), lazy-loaded views (first paint 95 kB gzip, was 251), real README, meta/theme-color. Verified serving at /windsync2/ subpath via `vite preview`. 45 tests.
 
-All build phases complete. Remaining: create GitHub repo `windsync2`, push, enable Pages (Actions source) → live at calvintirrell.github.io/windsync2.
+All build phases complete. Remaining: create GitHub repo `windsync2`, push, enable Pages (Actions source) → live at calvintirrell.github.io/WindSync2.
 
 Gate: tests green → update this file → commit → wait for approval before next phase.

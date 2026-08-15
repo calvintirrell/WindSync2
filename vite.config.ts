@@ -42,7 +42,7 @@ export default defineConfig({
       },
     }),
   ],
-  base: '/windsync2/',
+  base: '/WindSync2/',
   test: {
     environment: 'jsdom',
     globals: true,

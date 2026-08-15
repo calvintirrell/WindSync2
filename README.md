@@ -29,7 +29,7 @@ npm run preview    # serve the production build locally
 
 ## Deployment
 
-Pushing to `main` runs the GitHub Actions workflow (`.github/workflows/deploy.yml`): tests → build → deploy to GitHub Pages. The Vite `base` is `/windsync2/`.
+Pushing to `main` runs the GitHub Actions workflow (`.github/workflows/deploy.yml`): tests → build → deploy to GitHub Pages. The Vite `base` is `/WindSync2/`.
 
 ## Demo controls
 
