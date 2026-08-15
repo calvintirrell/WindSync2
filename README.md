@@ -33,6 +33,8 @@ npm run preview    # serve the production build locally
 
 Pushing to `main` runs the GitHub Actions workflow (`.github/workflows/deploy.yml`): tests → build → deploy to GitHub Pages. The Vite `base` is `/WindSync2/`.
 
+**Seeing a stale version after a deploy?** The app is an offline-first PWA, so browsers that already visited serve the old cached version first while the service worker fetches the update in the background (GitHub Pages also edge-caches files for up to 10 minutes). Refresh twice — or close and reopen the tab — to pick up a fresh deploy. New visitors always get the latest version.
+
 ## Demo controls
 
 - Sidebar → **Clear Logs & Notifications** resets logs/notifications and restores the seeded work orders
