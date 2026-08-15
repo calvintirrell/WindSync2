@@ -6,6 +6,7 @@ import WorkOrderDetails from './views/WorkOrderDetails'
 import TechnicianDashboard from './views/TechnicianDashboard'
 import Notifications from './views/Notifications'
 import ManagerDashboard from './views/ManagerDashboard'
+import Toaster from './components/Toaster'
 
 const VIEW_COMPONENTS: Record<ViewId, () => React.JSX.Element> = {
   'plan-of-day': PlanOfDay,
@@ -51,6 +52,7 @@ export default function App() {
       <main className="flex-1 p-6">
         {ready ? <ActiveView /> : <p className="text-slate-400">Loading…</p>}
       </main>
+      <Toaster />
     </div>
   )
 }
