@@ -1,5 +1,7 @@
 # WindSync
 
+**🌐 Live app: [calvintirrell.github.io/WindSync2](https://calvintirrell.github.io/WindSync2/)** — no install or account needed; open the link and it runs entirely in your browser.
+
 A field maintenance management web app for wind farm technicians — view work orders, log task progress, and receive priority-based notifications. Rebuilt as a fully client-side React SPA so it runs on GitHub Pages with no backend, works offline, and installs to a phone home screen as a PWA.
 
 This is a static rebuild of [windsync](https://github.com/calvintirrell/windsync) (Python/Streamlit). All data lives in the browser via IndexedDB — every visitor gets their own isolated demo data, seeded on first visit.
