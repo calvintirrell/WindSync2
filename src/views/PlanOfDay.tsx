@@ -63,43 +63,42 @@ export default function PlanOfDay() {
 
   return (
     <section className="flex flex-col gap-6">
-      <h2 className="text-2xl font-semibold">Plan of Day (POD)</h2>
+      <div className="flex flex-wrap items-start justify-between gap-x-10 gap-y-4">
+        <div className="flex flex-col gap-4">
+          <h2 className="text-2xl font-semibold">Plan of Day (POD)</h2>
 
-      <div className="flex flex-wrap items-end gap-6">
-        <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
-          Sort tasks by:
-          <select
-            value={sortMode}
-            onChange={(e) => setSortMode(e.target.value as SortMode)}
-            className="rounded-lg border border-slate-300 bg-white px-3 py-2"
-          >
-            <option>Priority</option>
-            <option>Default Order</option>
-          </select>
-        </label>
-        <fieldset className="flex items-center gap-3">
-          <legend className="mb-1 text-sm font-medium text-slate-700">Filter by priority:</legend>
-          {PRIORITY_ORDER.map((p) => (
-            <label key={p} className="flex items-center gap-1.5 text-sm">
-              <input
-                type="checkbox"
-                checked={selectedPriorities.includes(p)}
-                onChange={() => togglePriority(p)}
-                className="h-4 w-4 accent-sky-600"
-              />
-              {p}
+          <div className="flex flex-wrap items-end gap-6">
+            <label className="flex flex-col gap-1 text-sm font-medium text-slate-700">
+              Sort tasks by:
+              <select
+                value={sortMode}
+                onChange={(e) => setSortMode(e.target.value as SortMode)}
+                className="rounded-lg border border-slate-300 bg-white px-3 py-2"
+              >
+                <option>Priority</option>
+                <option>Default Order</option>
+              </select>
             </label>
-          ))}
-        </fieldset>
-      </div>
+            <fieldset className="flex items-center gap-3">
+              <legend className="mb-1 text-sm font-medium text-slate-700">Filter by priority:</legend>
+              {PRIORITY_ORDER.map((p) => (
+                <label key={p} className="flex items-center gap-1.5 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={selectedPriorities.includes(p)}
+                    onChange={() => togglePriority(p)}
+                    className="h-4 w-4 accent-sky-600"
+                  />
+                  {p}
+                </label>
+              ))}
+            </fieldset>
+          </div>
+        </div>
 
-      <p className="rounded-lg bg-sky-50 px-4 py-3 text-sm text-sky-900">
-        💡 <strong>Optimization Simulation</strong>: Tasks are clustered by location.
-      </p>
-
-      <div>
-        <h3 className="mb-2 text-lg font-semibold">🔔 Notification Testing</h3>
-        <div className="flex flex-wrap gap-3">
+        <div>
+          <h3 className="mb-2 text-lg font-semibold">🔔 Notification Testing</h3>
+          <div className="flex flex-wrap gap-3">
           <button
             onClick={async () => {
               await createNotification({
@@ -138,8 +137,13 @@ export default function PlanOfDay() {
           >
             📋 Simulate Priority Change
           </button>
+          </div>
         </div>
       </div>
+
+      <p className="rounded-lg bg-sky-50 px-4 py-3 text-sm text-sky-900">
+        💡 <strong>Optimization Simulation</strong>: Tasks are clustered by location.
+      </p>
 
       {filtered.length === 0 ? (
         <p className="rounded-lg bg-amber-50 p-4 text-amber-800">
