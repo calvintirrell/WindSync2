@@ -10,7 +10,8 @@ Local-only until the GitHub repo is created (planned URL: calvintirrell.github.i
 - [x] **P2 — Plan of Day**: active work orders w/ priority sort + filter checkboxes, suggested secondary task (haversine ≤10 mi, strictly lower priority), Leaflet/OSM map with priority-colored markers. Simulate buttons deferred to P4 (need notification store). 17 tests total.
 - [x] **P3 — Work Order Details**: selector, AI diagnostic banner (+ create-notification button), tribal knowledge, tap-to-log checklist (log-once, derived from logs table), completion notification, custom note/photo logging (Blob in IndexedDB), activity log. Toaster component + `createNotification` helper. 25 tests total.
 - [x] **P4 — Notifications**: center view (metrics, quick actions, priority/read filters, accent-colored cards, mark-read/acknowledge), sidebar unread badge + critical alert list + "Clear Logs & Notifications" reset, simulate buttons on Plan of Day. 39 tests total.
-- [ ] **P5 — Dashboards**: technician + manager views (Recharts).
+- [x] **P5 — Dashboards**: technician metrics + priority bar chart (single hue, live-updating), manager cost-savings grouped bar chart (validated CVD-safe pair `#c2410c`/`#0284c7`, legend + tooltips + table fallback), emergency broadcast + shift update controls. Shared Metric component. 45 tests total.
+  - P6 note: bundle is 251 kB gzip in one chunk — consider React.lazy for recharts/leaflet views.
 - [ ] **P6 — Offline/PWA + polish**: service worker, installable, final pass.
 
 Gate: tests green → update this file → commit → wait for approval before next phase.
